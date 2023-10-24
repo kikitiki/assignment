@@ -24,7 +24,7 @@ import java.util.List;
 public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
-    UserRepository userRepo;
+    private UserRepository userRepo;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -39,7 +39,13 @@ public class JwtFilter extends OncePerRequestFilter {
             return;
         }
 
+//        if (!StringUtils.hasText(header) || !header.startsWith("Bearer ")) {
+//            chain.doFilter(request, response);
+//            return;
+//        }
+
         final String token = header.split(" ")[1].trim();
+       // final String token = header.substring(7);
         UserDetails userDetails = userRepo
                 .findByUsername(jwtUtil.getUsernameFromToken(toString()))
                 .orElse(null);
