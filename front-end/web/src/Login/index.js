@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLocalState } from "../util/useLocalStorage";
+import { Button, Col, Container, Row, Form } from "react-bootstrap";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -37,27 +38,62 @@ const Login = () => {
 
   return (
     <>
-      <div>
-        <label htmlFor="username">Username</label>
-        <input
-          type="email"
-          id="username"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        ></input>
-      </div>
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        value={password}
-        onChange={(event) => setPassword(event.target.value)}
-      ></input>
-      <div>
-        <button id="submit" type="button" onClick={() => sendLoginRequest()}>
-          Login
-        </button>
-      </div>
+      <Container className="mt-5">
+        <Row className="justify-content-center">
+          <Col md="8" lg="6">
+            <Form.Group className="mb-3" controlId="username">
+              <Form.Label className="fs-4">Username</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="joe@gmail.com"
+                value={username}
+                size="lg"
+                onChange={(event) => setUsername(event.target.value)}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row className="justify-content-center">
+          <Col md="8" lg="6">
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label className="fs-4">Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Enter your password"
+                size="lg"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row className="justify-content-center">
+          <Col
+            md="8"
+            lg="6"
+            className="mt-2 d-flex flex-column gap-5 flex-md-row justify-content-md-between"
+          >
+            <Button
+              id="submit"
+              type="button"
+              size="lg"
+              onClick={() => sendLoginRequest()}
+            >
+              Login
+            </Button>
+
+            <Button
+              id="submit"
+              type="button"
+              variant="secondary"
+              size="lg"
+              onClick={() => (window.location = "/")}
+            >
+              Exit
+            </Button>
+          </Col>
+        </Row>{" "}
+      </Container>
     </>
   );
 };
